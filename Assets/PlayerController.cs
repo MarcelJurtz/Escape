@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
+
+    public Text instructionText;
 
     private bool isMoving = false;
     private Rigidbody playerBody;
@@ -16,7 +19,7 @@ public class PlayerController : MonoBehaviour {
         playerBody = GetComponent<Rigidbody>();
         playerTransform = GetComponent<Transform>();
         startPosition = playerTransform.position;
-	}
+    }
 	
 	void Update ()
     {
@@ -54,6 +57,9 @@ public class PlayerController : MonoBehaviour {
 
     void respawnPlayer()
     {
+        MovementAllowed allowedDirections = MovementLimits.getRandomRestriction();
+        instructionText.text = allowedDirections.getTitle();
+
         playerBody.velocity = Vector3.zero;
         playerBody.angularVelocity = Vector3.zero;
         playerTransform.position = startPosition;
