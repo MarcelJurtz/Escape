@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour {
     {
         isLiving = false;
         instructionText.text = "GAME OVER";
+        HighscoreManager.setHighscore(score);
     }
 
     public MovementAllowed getAllowedDirections()
