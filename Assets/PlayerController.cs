@@ -8,11 +8,14 @@ public class PlayerController : MonoBehaviour {
     public Text instructionText;
 
     private bool isMoving = false;
+    private bool isLiving = true;
     private Rigidbody playerBody;
     private Transform playerTransform;
     private Vector3 startPosition;
     private const int speed = 1000;
     private const int respawnRateInSeconds = 1;
+
+    private MovementAllowed allowedDirections;
 
 	void Start ()
     {
@@ -23,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 	
 	void Update ()
     {
-        if (!isMoving)
+        if (!isMoving && isLiving)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -57,12 +60,26 @@ public class PlayerController : MonoBehaviour {
 
     void respawnPlayer()
     {
-        MovementAllowed allowedDirections = MovementLimits.getRandomRestriction();
-        instructionText.text = allowedDirections.getTitle();
+        if(isLiving)
+        {
+            allowedDirections = MovementLimits.getRandomRestriction();
+            instructionText.text = allowedDirections.getTitle();
 
-        playerBody.velocity = Vector3.zero;
-        playerBody.angularVelocity = Vector3.zero;
-        playerTransform.position = startPosition;
-        isMoving = false;
+            playerBody.velocity = Vector3.zero;
+            playerBody.angularVelocity = Vector3.zero;
+            playerTransform.position = startPosition;
+            isMoving = false;
+        }
+    }
+
+    public void kill()
+    {
+        isLiving = false;
+        instructionText.text = "GAME OVER";
+    }
+
+    public MovementAllowed getAllowedDirections()
+    {
+        return allowedDirections;
     }
 }

@@ -23,6 +23,11 @@ public class MovementAllowed
     {
         return this.title;
     }
+
+    public Movement[] getAllowedDirections()
+    {
+        return this.allowed;
+    }
 }
 
 public class MovementLimits {
