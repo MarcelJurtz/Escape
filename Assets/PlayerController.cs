@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
 
     public Text instructionText;
+    public Text scoreText;
 
     private bool isMoving = false;
     private bool isLiving = true;
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour {
     private const int speed = 1000;
     private const int respawnRateInSeconds = 1;
 
+    private int score;
+
     private MovementAllowed allowedDirections;
 
 	void Start ()
@@ -22,6 +25,7 @@ public class PlayerController : MonoBehaviour {
         playerBody = GetComponent<Rigidbody>();
         playerTransform = GetComponent<Transform>();
         startPosition = playerTransform.position;
+        score = 0;
     }
 	
 	void Update ()
@@ -69,6 +73,9 @@ public class PlayerController : MonoBehaviour {
             playerBody.angularVelocity = Vector3.zero;
             playerTransform.position = startPosition;
             isMoving = false;
+
+            score++;
+            scoreText.text = score.ToString("D2");
         }
     }
 
