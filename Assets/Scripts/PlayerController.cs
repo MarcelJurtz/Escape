@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     public Text instructionText;
     public Text scoreText;
@@ -20,20 +21,24 @@ public class PlayerController : MonoBehaviour {
 
     private MovementAllowed allowedDirections;
 
-	void Start ()
+    void Start()
     {
         playerBody = GetComponent<Rigidbody>();
         playerTransform = GetComponent<Transform>();
         startPosition = playerTransform.position;
         score = 0;
+
+        allowedDirections = MovementLimits.getRandomRestriction();
+        instructionText.text = allowedDirections.getTitle();
     }
-	
-	void Update ()
+
+    void Update()
     {
         if (!isMoving && isLiving)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                instructionText.text = "";
                 playerBody.AddForce(0, speed, 0);
                 isMoving = true;
                 InvokeRepeating("respawnPlayer", respawnRateInSeconds, 0);
@@ -41,6 +46,7 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                instructionText.text = "";
                 playerBody.AddForce(0, -speed, 0);
                 isMoving = true;
                 InvokeRepeating("respawnPlayer", respawnRateInSeconds, 0);
@@ -48,6 +54,7 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                instructionText.text = "";
                 playerBody.AddForce(-speed, 0, 0);
                 isMoving = true;
                 InvokeRepeating("respawnPlayer", respawnRateInSeconds, 0);
@@ -55,6 +62,7 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
+                instructionText.text = "";
                 playerBody.AddForce(speed, 0, 0);
                 isMoving = true;
                 InvokeRepeating("respawnPlayer", respawnRateInSeconds, 0);
@@ -64,7 +72,7 @@ public class PlayerController : MonoBehaviour {
 
     void respawnPlayer()
     {
-        if(isLiving)
+        if (isLiving)
         {
             allowedDirections = MovementLimits.getRandomRestriction();
             instructionText.text = allowedDirections.getTitle();
@@ -84,11 +92,17 @@ public class PlayerController : MonoBehaviour {
         isLiving = false;
         instructionText.text = "GAME OVER";
         HighscoreManager.setHighscore(score);
-        LevelLoader.LoadMenuScene();
+        StartCoroutine(WaitAndLoadMenu());
     }
 
     public MovementAllowed getAllowedDirections()
     {
         return allowedDirections;
+    }
+
+    IEnumerator WaitAndLoadMenu()
+    {
+        yield return new WaitForSeconds(3);
+        LevelLoader.LoadMenuScene();
     }
 }
