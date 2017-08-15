@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public Text instructionText;
     public Text scoreText;
 
+    public GestureRecognizer swipeControls;
+
     private bool isMoving = false;
     private bool isLiving = true;
     private Rigidbody playerBody;
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isMoving && isLiving)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow) || swipeControls.SwipeUp)
             {
                 instructionText.text = "";
                 playerBody.AddForce(0, speed, 0);
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour
                 InvokeRepeating("respawnPlayer", respawnRateInSeconds, 0);
             }
 
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.DownArrow) || swipeControls.SwipeDown)
             {
                 instructionText.text = "";
                 playerBody.AddForce(0, -speed, 0);
@@ -52,7 +54,7 @@ public class PlayerController : MonoBehaviour
                 InvokeRepeating("respawnPlayer", respawnRateInSeconds, 0);
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || swipeControls.SwipeLeft)
             {
                 instructionText.text = "";
                 playerBody.AddForce(-speed, 0, 0);
@@ -60,7 +62,7 @@ public class PlayerController : MonoBehaviour
                 InvokeRepeating("respawnPlayer", respawnRateInSeconds, 0);
             }
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKeyDown(KeyCode.RightArrow) || swipeControls.SwipeRight)
             {
                 instructionText.text = "";
                 playerBody.AddForce(speed, 0, 0);
