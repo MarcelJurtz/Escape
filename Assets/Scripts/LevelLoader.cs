@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour {
 
-	private static void LoadLevel(Levels level)
+	private void LoadLevel(Levels level)
     {
         if(level.Equals(Levels.MAIN))
         {
@@ -17,12 +17,12 @@ public class LevelLoader : MonoBehaviour {
         }
     }
 
-    public static void LoadMenuScene()
+    public void LoadMenuScene()
     {
         LoadLevel(Levels.MENU);
     }
 
-    public static void LoadMainScene()
+    public void LoadMainScene()
     {
         LoadLevel(Levels.MAIN);
     }

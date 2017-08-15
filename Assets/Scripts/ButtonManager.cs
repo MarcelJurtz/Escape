@@ -6,7 +6,8 @@ public class ButtonManager : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            LevelLoader.LoadMainScene();
+            LevelLoader loader = new LevelLoader();
+            loader.LoadMainScene();
         }
     }
 }

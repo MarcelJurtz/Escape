@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator WaitAndLoadMenu()
     {
         yield return new WaitForSeconds(3);
-        LevelLoader.LoadMenuScene();
+        LevelLoader loader = new LevelLoader();
+        loader.LoadMenuScene();
     }
 }
