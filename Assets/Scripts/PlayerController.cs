@@ -94,6 +94,11 @@ public class PlayerController : MonoBehaviour
         isLiving = false;
         instructionText.text = "GAME OVER";
         HighscoreManager.setHighscore(score);
+
+        // Destroy Score Text and center "Game Over"
+        Destroy(scoreText);
+        instructionText.transform.position = new Vector3(0, 0, 0);
+
         StartCoroutine(WaitAndLoadMenu());
     }
 
