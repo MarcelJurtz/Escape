@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     private const int speed = 1000;
     private const int respawnRateInSeconds = 1;
 
+    public Slider countdownSlider;
+    private float timeInMilliSeconds = 3f;
+    private float maxTime;
     private int score;
 
     private MovementAllowed allowedDirections;
@@ -32,12 +35,23 @@ public class PlayerController : MonoBehaviour
 
         allowedDirections = MovementLimits.getRandomRestriction();
         instructionText.text = allowedDirections.getTitle();
+
+        maxTime = timeInMilliSeconds;
+        countdownSlider.value = 1;
     }
 
     void Update()
     {
         if (!isMoving && isLiving)
         {
+            timeInMilliSeconds -= Time.deltaTime;
+            countdownSlider.value = timeInMilliSeconds / maxTime;
+
+            if (timeInMilliSeconds < 0)
+            {
+                kill();
+            }
+
             if (Input.GetKeyDown(KeyCode.UpArrow) || swipeControls.SwipeUp)
             {
                 instructionText.text = "";
@@ -86,6 +100,9 @@ public class PlayerController : MonoBehaviour
 
             score++;
             scoreText.text = score.ToString("D2");
+
+            timeInMilliSeconds = maxTime;
+            countdownSlider.value = 1;
         }
     }
 
@@ -99,7 +116,10 @@ public class PlayerController : MonoBehaviour
         Destroy(scoreText);
         instructionText.transform.position = new Vector3(0, 0, 0);
 
-        StartCoroutine(WaitAndLoadMenu());
+        Destroy(countdownSlider.gameObject);
+        this.gameObject.GetComponent<Renderer>().enabled = false;
+
+        StartCoroutine(WaitAndLoadMenu());  
     }
 
     public MovementAllowed getAllowedDirections()
