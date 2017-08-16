@@ -7,7 +7,7 @@ public class GestureRecognizer : MonoBehaviour {
     private bool tap, swipeLeft, swipeRight, swipeUp, swipeDown;
     private bool isTouching = false;
     private Vector2 swipeStart, swipeDelta;
-    private const int SWIPE_TOLERANCE = 100;
+    private const int SWIPE_TOLERANCE = 250;
 
     private void resetSwipePosition()
     {
