@@ -20,8 +20,13 @@ public class PlayerController : MonoBehaviour
     private const int respawnRateInSeconds = 1;
 
     public Slider countdownSlider;
-    private float timeInMilliSeconds = 3f;
-    private float maxTime;
+    private float timeInSeconds;
+    private float currentMaxTime;
+    private float maxTimeLevel1 = 3f;
+    private float maxTimeLevel2 = 2.5f;
+    private float maxTimeLevel3 = 2f;
+    private float maxTimeLevel4 = 1.5f;
+    private float maxTimeLevel5 = 1f;
     private int score;
 
     private MovementAllowed allowedDirections;
@@ -36,7 +41,8 @@ public class PlayerController : MonoBehaviour
         allowedDirections = MovementLimits.getRandomRestriction();
         instructionText.text = allowedDirections.getTitle();
 
-        maxTime = timeInMilliSeconds;
+        currentMaxTime = maxTimeLevel1;
+        timeInSeconds = currentMaxTime;
         countdownSlider.value = 1;
     }
 
@@ -44,10 +50,10 @@ public class PlayerController : MonoBehaviour
     {
         if (!isMoving && isLiving)
         {
-            timeInMilliSeconds -= Time.deltaTime;
-            countdownSlider.value = timeInMilliSeconds / maxTime;
+            timeInSeconds -= Time.deltaTime;
+            countdownSlider.value = timeInSeconds / currentMaxTime;
 
-            if (timeInMilliSeconds < 0)
+            if (timeInSeconds < 0)
             {
                 kill();
             }
@@ -101,7 +107,29 @@ public class PlayerController : MonoBehaviour
             score++;
             scoreText.text = score.ToString("D2");
 
-            timeInMilliSeconds = maxTime;
+            if (score > 20)
+            {
+                currentMaxTime = maxTimeLevel5;
+            }
+            else if (score > 15)
+            {
+                currentMaxTime = maxTimeLevel4;
+            }
+            else if (score > 10)
+            {
+                currentMaxTime = maxTimeLevel3;
+            }
+            else if (score > 5)
+            {
+                currentMaxTime = maxTimeLevel2;
+            }
+            else
+            {
+                currentMaxTime = maxTimeLevel1;
+            }
+
+            timeInSeconds = currentMaxTime;
+            
             countdownSlider.value = 1;
         }
     }
