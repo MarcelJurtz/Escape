@@ -21,3 +21,10 @@ Sounds easier than it is!
 ### Gameplay
 
 <img src="IMG/gameplay.gif">
+
+
+## Font
+
+Due to aversion to check out stupid font licenses, I created my own font for this project which is available here: 
+[https://fontstruct.com/fontstructions/show/1427932/pixel-313](https://fontstruct.com/fontstructions/show/1427932/pixel-313).
+Since I'm not a designer, this is just whats neccessary for this project, nothing more. Feel free to use it anyway.
