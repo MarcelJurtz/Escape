@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         score = 0;
 
         allowedDirections = MovementLimits.getRandomRestriction();
-        instructionText.text = allowedDirections.getTitle();
+        instructionText.text = allowedDirections.getTitle().ToUpper();
 
         currentMaxTime = maxTimeLevel1;
         timeInSeconds = currentMaxTime;
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         if (isLiving)
         {
             allowedDirections = MovementLimits.getRandomRestriction();
-            instructionText.text = allowedDirections.getTitle();
+            instructionText.text = allowedDirections.getTitle().ToUpper();
 
             playerBody.velocity = Vector3.zero;
             playerBody.angularVelocity = Vector3.zero;

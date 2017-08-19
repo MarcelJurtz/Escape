@@ -8,6 +8,6 @@ public class MenuManager : MonoBehaviour {
     public Text highscoreText;
 
 	void Start () {
-        highscoreText.text = "Highscore: " + HighscoreManager.getHighscore().ToString("D2");
+        highscoreText.text = "HIGHSCORE: " + HighscoreManager.getHighscore().ToString("D2");
 	}
 }
