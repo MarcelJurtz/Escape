@@ -47,6 +47,11 @@ public class MovementLimits {
     private static MovementAllowed horizontalOnly = new MovementAllowed("Left or Right", new Movement[] { Movement.LEFT, Movement.RIGHT });
     private static MovementAllowed verticalOnly = new MovementAllowed("Up or Down", new Movement[] { Movement.UP, Movement.DOWN });
 
+    private static MovementAllowed rightUp = new MovementAllowed("Right or Up", new Movement[] { Movement.RIGHT, Movement.UP });
+    private static MovementAllowed rightDown = new MovementAllowed("Right or Down", new Movement[] { Movement.RIGHT, Movement.DOWN });
+    private static MovementAllowed leftUp = new MovementAllowed("Left or Up", new Movement[] { Movement.LEFT, Movement.UP });
+    private static MovementAllowed leftDown = new MovementAllowed("Left or Down", new Movement[] { Movement.LEFT, Movement.DOWN });
+
 
     private static MovementAllowed[] restrictions = {
         rightOnly,
@@ -58,7 +63,11 @@ public class MovementLimits {
         notUp,
         notDown,
         horizontalOnly,
-        verticalOnly
+        verticalOnly,
+        rightUp,
+        rightDown,
+        leftUp,
+        leftDown
     };
 
 
