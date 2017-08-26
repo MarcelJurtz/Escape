@@ -2,6 +2,8 @@
 
 Simple reaction based 2D game.
 
+[Try it live!](https://marceljurtz.github.io/Escape-Web/)
+
 The goal is to move the cube to one of four directions (up, down, left, right) by following the instructions on screen.
 
 Sounds easier than it is!
